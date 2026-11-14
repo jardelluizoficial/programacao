@@ -7,8 +7,8 @@ int main(){
     SetConsoleCP(CP_UTF8);
 
     //VARIÁVEIS.
-    int itens = 0, qtd = 0, totalItens = 0, qtdCeu = 0, qtdFlocos = 0, qtdBrig = 0, qtdTrad = 0;
-    float totalConta = 0.0;
+    int itens = 0, qtd = 0, totalItens = 0, qtdCeu = 0, qtdFlocos = 0, qtdBrig = 0, qtdTrad = 0, pagamento = 0, parcelas = 0, qtdParcelas = 0;
+    float totalConta = 0.0, totalComDesconto = 0.0;
 
     // HOME BOAS VINDAS.
     printf("\n\nBem-vindo ao Cloud-Sweet!\n\n");
@@ -102,28 +102,80 @@ int main(){
             
             default:
                 printf("Código do item inválido, por gentileza confirme o código no cardápio digital.\n");
+                break;
         } 
     }
     while (itens != 0);
     
-        if(itens == 0)
-        {
-            printf("Você optou por finalizar o seu carrinho!\n");
-        }
-        if (qtdCeu > 0) {
-            printf("- %dx Algodão Doce Céu Azul: R$ %.2f\n", qtdCeu, qtdCeu * 10.00);
-        }
-        if (qtdFlocos > 0) {
-            printf("- %dx Algodão Doce Flocos com Oreo: R$ %.2f\n", qtdFlocos, qtdFlocos * 12.00);
-        }
-        if (qtdBrig > 0) {
-            printf("- %dx Algodão Doce Brigadeiro com Nutella: R$ %.2f\n", qtdBrig, qtdBrig * 15.00);
-        }
-        if (qtdTrad > 0) {
-            printf("- %dx Algodão Doce Tradicional (TheCloud): R$ %.2f\n", qtdTrad, qtdTrad * 10.00);
-        }
+    if(itens == 0)
+    {
+        printf("Você optou por finalizar o seu carrinho!\n");
+    }
+    if (qtdCeu > 0) {
+        printf("- %dx Algodão Doce Céu Azul: R$ %.2f\n", qtdCeu, qtdCeu * 10.00);
+    }
+    if (qtdFlocos > 0) {
+        printf("- %dx Algodão Doce Flocos com Oreo: R$ %.2f\n", qtdFlocos, qtdFlocos * 12.00);
+    }
+    if (qtdBrig > 0) {
+        printf("- %dx Algodão Doce Brigadeiro com Nutella: R$ %.2f\n", qtdBrig, qtdBrig * 15.00);
+    }
+    if (qtdTrad > 0) {
+        printf("- %dx Algodão Doce Tradicional (TheCloud): R$ %.2f\n", qtdTrad, qtdTrad * 10.00);
+    }
 
-        
+   
+if (totalItens > 0) {
+    printf("\nTotal a pagar: R$ %.2f\n", totalConta);
+    printf("Digite o código da forma de pagamento que deseja realizar:\n");
+    printf("1 - PIX (5%% de desconto)\n");
+    printf("2 - Cartão de Crédito\n");
+    scanf("%d", &pagamento);
+
+    switch(pagamento) {
+        case 1:
+            totalComDesconto = totalConta * 0.95; // Aplica 5% de desconto
+            printf("\nVocê selecionou PIX!\n");
+            printf("Desconto aplicado: R$ %.2f\n", totalConta - totalComDesconto);
+            printf("Total final a pagar: R$ %.2f\n", totalComDesconto);
+            break;
+
+        case 2:
+            printf("\nVocê selecionou Cartão de Crédito. Escolha uma das opções abaixo:\n");
+            printf("1 - À vista no total de R$ %.2f sem juros.\n", totalConta);
+            printf("2 - Parcelado em até 3x sem juros.\n");
+            scanf("%d", &parcelas);
+
+            switch(parcelas) {
+                case 1:
+                    printf("\nPagamento à vista selecionado. Total: R$ %.2f\n", totalConta);
+                    break;
+
+                case 2:
+                    printf("\nEm quantas vezes deseja parcelar? (Digite 2 ou 3): ");
+                    scanf("%d", &qtdParcelas);
+
+                    if (qtdParcelas == 2 || qtdParcelas == 3) {
+                        printf("Pagamento aprovado: %dx de R$ %.2f sem juros (Total: R$ %.2f).\n", 
+                               qtdParcelas, totalConta / qtdParcelas, totalConta);
+                    } else {
+                        printf("Quantidade de parcelas inválida! Permitido apenas 2x ou 3x.\n");
+                    }
+                    break;
+
+                default:
+                    printf("Modelo de pagamento inválido, selecione entre 1 - À vista e 2 - Parcelado.\n");
+                    break;
+            }
+            break;
+
+        default:
+            printf("Método de pagamento inválido, por gentileza selecione entre as opções disponíveis.\n");
+            break;
+    }
+} else {
+    printf("\nCarrinho vazio. Obrigado pela visita!\n");
+}
 
     return 0;
 }
