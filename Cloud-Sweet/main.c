@@ -123,5 +123,7 @@ int main(){
             printf("- %dx Algodão Doce Tradicional (TheCloud): R$ %.2f\n", qtdTrad, qtdTrad * 10.00);
         }
 
+        
+
     return 0;
 }
