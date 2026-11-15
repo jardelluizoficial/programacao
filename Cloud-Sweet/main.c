@@ -1,3 +1,11 @@
+// Esse código foi desenvolvido 100% sem o uso de IA, apenas para teste de aprendizado.
+// Estou aprendendo programar em C devido a matéria atual da faculdade.
+// Como estou ainda cursando estou aprendendo apenas C para não confundir sintaxe com outras linguagens.
+// Após terminar os trabalhos/provas pretendo migrar esse conhecimento adquirido para linguagem python.
+// Até o presente momento só aprendi o básico por isso está sem funções mais complexas.
+
+// A ideia foi criar um sistema onde clientes possam comprar algodão doce de uma loja fictícia (Cloud-Sweet).
+
 #include <stdio.h>
 #include <windows.h>
 
@@ -126,7 +134,7 @@ int main(){
 
    
 if (totalItens > 0) {
-    printf("\nTotal a pagar: R$ %.2f\n", totalConta);
+    printf("\nTotal a pagar: R$ %.2f\n\n", totalConta);
     printf("Digite o código da forma de pagamento que deseja realizar:\n");
     printf("1 - PIX (5%% de desconto)\n");
     printf("2 - Cartão de Crédito\n");
